@@ -3,6 +3,7 @@ package steggo
 import (
 	"bytes"
 	"fmt"
+	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
@@ -14,13 +15,11 @@ func TestHuffman(t *testing.T) {
 	huffman := Huffman(b)
 	unHuffman, err := UnHuffman(huffman)
 	if err != nil {
-		fmt.Println(err)
+		t.Error(err)
 	}
 	for i := 0; i < len(unHuffman); i++ {
 		fmt.Printf("%08b %08b\n", b[i], unHuffman[i])
 	}
 
-	if !bytes.Equal(b, unHuffman) {
-		t.Error("The data before Huffman and after UnHuffman are not equal")
-	}
+	assert.Equal(t, b, unHuffman)
 }

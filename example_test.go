@@ -1,20 +1,33 @@
 package steggo
 
 import (
+	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 func TestBasic(t *testing.T) {
-	plain := "99999999999999"
-	encode, err := Encode(plain, "")
+	plain := []byte("steggoo")
+	encode, err := Encode(plain)
 	if err != nil {
+		t.Error(err)
 		return
 	}
-	decode, err := Decode(encode, "")
+	decode, err := Decode(encode)
 	if err != nil {
+		t.Error(err)
 		return
 	}
-	if plain != decode {
-		t.Error("decode failed.")
+	assert.Equal(t, plain, decode)
+
+	encode, err = Encode(plain, plain)
+	if err != nil {
+		t.Error(err)
+		return
 	}
+	decode, err = Decode(encode, plain)
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	assert.Equal(t, plain, decode)
 }
