@@ -6,7 +6,7 @@ import (
 )
 
 func TestBasic(t *testing.T) {
-	plain := []byte("steggoo")
+	plain := []byte("steggo")
 	encode, err := Encode(plain)
 	if err != nil {
 		t.Error(err)
@@ -19,12 +19,13 @@ func TestBasic(t *testing.T) {
 	}
 	assert.Equal(t, plain, decode)
 
-	encode, err = Encode(plain, plain)
+	password := []byte("atom")
+	encode, err = Encode(plain, password)
 	if err != nil {
 		t.Error(err)
 		return
 	}
-	decode, err = Decode(encode, plain)
+	decode, err = Decode(encode, password)
 	if err != nil {
 		t.Error(err)
 		return
