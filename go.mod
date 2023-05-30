@@ -4,7 +4,7 @@ go 1.17
 
 require (
 	github.com/bkaradzic/go-lz4 v1.0.0
-	github.com/stretchr/testify v1.8.3
+	github.com/stretchr/testify v1.8.4
 )
 
 require (
